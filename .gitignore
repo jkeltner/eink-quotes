@@ -1,0 +1,7 @@
+.venv/
+out/
+site/
+firmware/.pio/
+firmware/include/config.h
+.DS_Store
+reference/

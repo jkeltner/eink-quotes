@@ -1,0 +1,40 @@
+# Renders the next 7 days of quotes and publishes them to GitHub Pages.
+# Runs on every push to quotes.yaml / render/, daily as a backstop, and on demand.
+name: render
+
+on:
+  push:
+    branches: [main]
+    paths: [quotes.yaml, "render/**", .github/workflows/render.yml]
+  schedule:
+    - cron: "0 10 * * *"  # ~3am Pacific; the board wakes at 6am
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r render/requirements.txt
+      - run: python render/render.py --days 7 --out site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

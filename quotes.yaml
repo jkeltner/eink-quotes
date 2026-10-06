@@ -1,0 +1,66 @@
+# Quotes for the e-ink board.
+#
+# Add an entry, commit, push. The GitHub Action re-renders and the display
+# picks it up on its next daily wake.
+#
+# Fields:
+#   text    (required)  The quote. Use a YAML block (|) to keep line breaks for poems.
+#   by      (optional)  Who said/wrote it.
+#   source  (optional)  Book, speech, year, etc. Shown after the name.
+#   kind    (optional)  quote (default) | poem | word — picks the layout + accent color.
+#   meaning (word only) The definition; `source` holds the part of speech.
+#   accent  (optional)  Override color: red | orange | blue | green | black
+#   date    (optional)  "MM-DD" — always show on this day (birthdays, holidays).
+#
+# Rotation: un-dated entries cycle in a fixed (hash-based) order, so every one
+# is shown once before anything repeats.
+
+settings:
+  # 0 = landscape. 180 = flip it if the image comes out upside down in the frame.
+  rotate: 0
+  show_date: true
+
+quotes:
+  - text: The best way to predict the future is to invent it.
+    by: Alan Kay
+
+  - text: How we spend our days is, of course, how we spend our lives.
+    by: Annie Dillard
+    source: The Writing Life
+
+  - text: Not everything that is faced can be changed, but nothing can be changed until it is faced.
+    by: James Baldwin
+
+  - text: If I have seen further it is by standing on the shoulders of giants.
+    by: Isaac Newton
+    source: letter to Robert Hooke, 1675
+
+  - text: Simplicity is prerequisite for reliability.
+    by: Edsger W. Dijkstra
+
+  - text: Make it work, make it right, make it fast.
+    by: Kent Beck
+
+  - text: We are what we repeatedly do. Excellence, then, is not an act, but a habit.
+    by: Will Durant
+    source: The Story of Philosophy
+
+  - text: >-
+      It is not the critic who counts; not the man who points out how the strong
+      man stumbles, or where the doer of deeds could have done them better. The
+      credit belongs to the man who is actually in the arena.
+    by: Theodore Roosevelt
+    source: Paris, 1910
+
+  - kind: poem
+    text: |
+      “Hope” is the thing with feathers –
+      That perches in the soul –
+      And sings the tune without the words –
+      And never stops – at all –
+    by: Emily Dickinson
+
+  - kind: word
+    text: petrichor
+    source: noun
+    meaning: The pleasant, earthy smell that comes with the first rain after a dry spell.
